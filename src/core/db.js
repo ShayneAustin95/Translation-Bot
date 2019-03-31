@@ -10,11 +10,11 @@ const db = new Sequelize(process.env.DATABASE_URL, {
 db
    .authenticate()
    .then(() =>
-      {
+   {
       logger("dev","Successfully connected to database");
    })
    .catch(err =>
-      {
+   {
       logger("error", err);
    });
 
@@ -24,46 +24,46 @@ const Servers = db.define("servers", {
       primaryKey: true,
       unique: true,
       allowNull: false
-      },
+   },
    lang: {
       type: Sequelize.STRING(8),
       defaultValue: "en"
       },
    count: {
       type: Sequelize.INTEGER,
-      defaultValue: 0,
+      defaultValue: 0
    },
    active: {
       type: Sequelize.BOOLEAN,
-      defaultValue: true,
-   },
+      defaultValue: true
+   }
 });
 
-const Tasks = db.define('tasks', {
-  origin: Sequelize.STRING(32),
-  dest: Sequelize.STRING(32),
-  reply: Sequelize.STRING(16),
-  server: Sequelize.STRING(32),
-  active: {
+const Tasks = db.define("tasks", {
+   origin: Sequelize.STRING(32),
+   dest: Sequelize.STRING(32),
+   reply: Sequelize.STRING(16),
+   server: Sequelize.STRING(32),
+   active: {
       type: Sequelize.BOOLEAN,
-      defaultValue: true,
+      defaultValue: true
    },
-  lang_to: {
-    type: Sequelize.STRING(8),
-    defaultValue: "en",
-  },
+   lang_to: {
+      type: Sequelize.STRING(8),
+      defaultValue: "en"
+   },
   lang_from: {
-    type: Sequelize.STRING(8),
-    defaultValue: "en",
-  }
+      type: Sequelize.STRING(8),
+      defaultValue: "en"
+   }
 },
 {
-    indexes: [
-        {
-            unique: true,
-            fields: ['origin', 'dest']
-        }
-    ]
+   indexes: [
+      {
+         unique: true,
+         fields: ["origin", "dest"]
+      }
+   ]
 });
 
 // -------------------
@@ -71,13 +71,11 @@ const Tasks = db.define('tasks', {
 // -------------------
 
 exports.initializeDatabase = function() {
+   Servers.sync({ logging: console.log });
+   Tasks.sync({ logging: console.log });
 
-  Servers.sync({ logging: console.log });
-  Tasks.sync({ logging: console.log });
-
-  // Add global server row
-  Servers.upsert({ id: "bot", lang: "en" });
-
+   // Add global server row
+   Servers.upsert({ id: "bot", lang: "en" });
 }
 
 // -----------------------
@@ -205,13 +203,13 @@ exports.removeTask = function(origin, dest, cb)
        return Tasks.destroy({ where: { [Op.or]: [{ origin: origin },{ dest: origin }] } }).then(
          function (err, result) {
            cb(null, result);
-         });;
+         });
    }
 
    return Tasks.destroy({ where: { [Op.or]: [{ origin: origin, dest: dest },{ origin: dest, dest: origin }] } }).then(
      function (err, result) {
        cb(null, result);
-     });;
+     });
 
 };
 

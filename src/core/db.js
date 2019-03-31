@@ -1,37 +1,39 @@
 const autoTranslate = require("./auto");
-const Sequelize = require('sequelize');
+const Sequelize = require("sequelize");
 const logger = require("./logger");
 const Op = Sequelize.Op;
 const db = new Sequelize(process.env.DATABASE_URL, {
-  logging: console.log,
-  //logging: null,
+   logging: console.log
+   //logging: null,
 });
 
 db
-  .authenticate()
-  .then(() => {
-    logger("dev",'Successfully connected to database');
-  })
-  .catch(err => {
-    logger("error", err);
-  });
+   .authenticate()
+   .then(() =>
+	 {
+      logger("dev","Successfully connected to database");
+   })
+   .catch(err =>
+	  {
+      logger("error", err);
+   });
 
-const Servers = db.define('servers', {
-  id: {
-    type: Sequelize.STRING(32),
-    primaryKey: true,
+const Servers = db.define("servers", {
+   id: {
+      type: Sequelize.STRING(32),
+      primaryKey: true,
 		unique: true,
-    allowNull: false,
+      allowNull: false,
 	},
-  lang: {
+   lang: {
 		type: Sequelize.STRING(8),
 		defaultValue: "en",
 	},
-  count: {
+   count: {
 		type: Sequelize.INTEGER,
 		defaultValue: 0,
 	},
-  active: {
+   active: {
 		type: Sequelize.BOOLEAN,
 		defaultValue: true,
 	},

@@ -10,11 +10,11 @@ const db = new Sequelize(process.env.DATABASE_URL, {
 db
    .authenticate()
    .then(() =>
-	 {
+      {
       logger("dev","Successfully connected to database");
    })
    .catch(err =>
-	  {
+      {
       logger("error", err);
    });
 
@@ -22,21 +22,21 @@ const Servers = db.define("servers", {
    id: {
       type: Sequelize.STRING(32),
       primaryKey: true,
-		unique: true,
-      allowNull: false,
-	},
+      unique: true,
+      allowNull: false
+      },
    lang: {
-		type: Sequelize.STRING(8),
-		defaultValue: "en",
-	},
+      type: Sequelize.STRING(8),
+      defaultValue: "en"
+      },
    count: {
-		type: Sequelize.INTEGER,
-		defaultValue: 0,
-	},
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+   },
    active: {
-		type: Sequelize.BOOLEAN,
-		defaultValue: true,
-	},
+      type: Sequelize.BOOLEAN,
+      defaultValue: true,
+   },
 });
 
 const Tasks = db.define('tasks', {
@@ -45,9 +45,9 @@ const Tasks = db.define('tasks', {
   reply: Sequelize.STRING(16),
   server: Sequelize.STRING(32),
   active: {
-		type: Sequelize.BOOLEAN,
-		defaultValue: true,
-	},
+      type: Sequelize.BOOLEAN,
+      defaultValue: true,
+   },
   lang_to: {
     type: Sequelize.STRING(8),
     defaultValue: "en",

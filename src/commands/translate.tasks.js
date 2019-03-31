@@ -103,7 +103,8 @@ module.exports = function(data)
 // ---------------------
 
 //const shoutTasks = function(res, data, origin, dest, destDisplay)
-const shoutTasks = function(res, data, origin)
+//const shoutTasks = function(res, data, origin)
+const shoutTasks = function(res, data)
 {
    //console.log(data);
    //console.log(res);

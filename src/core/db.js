@@ -74,7 +74,6 @@ exports.initializeDatabase = function()
 {
    Servers.sync({ logging: console.log });
    Tasks.sync({ logging: console.log });
-
    // Add global server row
    Servers.upsert({ id: "bot", lang: "en" });
 };
@@ -85,10 +84,10 @@ exports.initializeDatabase = function()
 
 exports.addServer = function(id, lang)
 {
-    return Servers.create({
-        id: id,
-        lang: lang
-    });
+   return Servers.create({
+      id: id,
+      lang: lang
+   });
 };
 
 // ------------------
@@ -97,24 +96,27 @@ exports.addServer = function(id, lang)
 
 exports.removeServer = function(id)
 {
-
-  return Servers.update({ active: false }, { where: { id: id } }).then( 
-    function (err, result) {
-      logger("error", err);
-  });
+   return Servers.update({ active: false }, { where: { id: id } }).then(
+      //function (err, result) {
+      function (err)
+      {
+         logger("error", err);
+      });
 };
 
 // -------------------
 // Update Server Lang
 // -------------------
 
-exports.updateServerLang = function(id, lang, cb)
+//exports.updateServerLang = function(id, lang, cb)
+exports.updateServerLang = function(id, lang)
 {
-
-  return Servers.update({ lang: lang }, { where: { id: id } }).then( 
-    function (err, result) {
-      logger("error", err);
-  });
+   return Servers.update({ lang: lang }, { where: { id: id } }).then( 
+      //function (err, result) {
+      function (err)
+      {
+         logger("error", err);
+      });
 };
 
 // ------------------
@@ -132,7 +134,7 @@ exports.channelTasks = function(data)
 
   try {
     const taskList = Tasks.findAll({ where: { origin: id, active: true }}).then(
-    function (result) {
+    function (result){
       data.rows = result;
       return autoTranslate(data);
     });

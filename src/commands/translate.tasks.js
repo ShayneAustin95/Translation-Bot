@@ -1,7 +1,7 @@
 const langCheck = require("../core/lang.check");
 const botSend = require("../core/send");
 const db = require("../core/db");
-const logger = require("../core/logger");
+''const logger = require("../core/logger");
 
 // --------------------
 // Handle stop command
@@ -9,7 +9,6 @@ const logger = require("../core/logger");
 
 module.exports = function(data)
 {
-
    //
    // Disallow this command in Direct/Private messages
    //
@@ -34,7 +33,7 @@ module.exports = function(data)
       return botSend(data);
    }
 
-/*
+   /*
    //
    // Disallow non-managers to stop for others
    //
@@ -75,7 +74,7 @@ module.exports = function(data)
 
       if (res.length < 1 || !res)
       {
-	 const orig = destResolver(origin);
+         const orig = destResolver(origin);
          data.color = "error";
          data.text =
             ":warning:  __**No tasks**__ for " +
@@ -103,35 +102,37 @@ module.exports = function(data)
 // Remove from database
 // ---------------------
 
-const shoutTasks = function(res, data, origin, dest, destDisplay)
+//const shoutTasks = function(res, data, origin, dest, destDisplay)
+const shoutTasks = function(res, data, origin, dest)
 {
    //console.log(data);
    //console.log(res);
 
    data.color = "ok";
-   data.text = ":negative_squared_cross_mark:  Translation tasks for this channel:"
+   data.text = ":negative_squared_cross_mark:  Translation tasks for this channel:";
    botSend(data);
 
       //"channel has been stopped for **" + destDisplay + "**"
 
-	/*
+   /*
    if (dest === "all")
    {
       data.text += ` (${res.length})`;
    }
    */
-   for(var i = 0, len = res.length; i < len; i++) {
-	const task = res[i];
-	const dest = destResolver(task.dest);
-	const origin = destResolver(task.origin);	
-	const lang_from = langCheck(task.lang_from).valid[0].name;	
-	const lang_to = langCheck(task.lang_to).valid[0].name;	
-   	data.text = `:arrow_right:   Translating **${lang_from}** messages from **<${origin}>** ` +
-		   `and sending **${lang_to}** messages to **<${dest}>**`
-	botSend(data);
-   }
+   for (var i = 0, len = res.length; i < len; i++)
+   {
+      const task = res[i];
+      const dest = destResolver(task.dest);
+      const origin = destResolver(task.origin);	
+      const lang_from = langCheck(task.lang_from).valid[0].name;	
+      const lang_to = langCheck(task.lang_to).valid[0].name;	
+      data.text = `:arrow_right:   Translating **${lang_from}** messages from **<${origin}>** ` + 
+	      `and sending **${lang_to}** messages to **<${dest}>**`
+      botSend(data);
+   };
 
-   data.text = ":negative_squared_cross_mark:  That's all I have!"
+   data.text = ":negative_squared_cross_mark:  That's all I have!";
    return botSend(data);
 };
 

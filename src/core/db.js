@@ -132,13 +132,13 @@ exports.channelTasks = function(data)
       id = "@" + data.message.author.id;
    }
 
-  try {
+  //try {
     //const taskList = Tasks.findAll({ where: { origin: id, active: true }}).then(
-    function (result){
-      data.rows = result;
-      return autoTranslate(data);
-    });
-  }
+    //function (result){
+      //data.rows = result;
+      //return autoTranslate(data);
+    //});
+  //}
   catch (e) {
     logger("error", e);
     data.err = e;

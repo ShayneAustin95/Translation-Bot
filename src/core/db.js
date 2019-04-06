@@ -1,4 +1,4 @@
-const autoTranslate = require("./auto");
+//const autoTranslate = require("./auto");
 const Sequelize = require("sequelize");
 const logger = require("./logger");
 const Op = Sequelize.Op;
@@ -125,7 +125,7 @@ exports.updateServerLang = function(id, lang)
 
 exports.channelTasks = function(data)
 {
-   //var id = data.message.channel.id;
+   var id = data.message.channel.id;
 
    if (data.message.channel.type === "dm")
    {

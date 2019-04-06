@@ -133,7 +133,7 @@ exports.channelTasks = function(data)
    }
 
   try {
-    const taskList = Tasks.findAll({ where: { origin: id, active: true }}).then(
+    //const taskList = Tasks.findAll({ where: { origin: id, active: true }}).then(
     function (result){
       data.rows = result;
       return autoTranslate(data);
@@ -144,7 +144,7 @@ exports.channelTasks = function(data)
     data.err = e;
     return autoTranslate(data);
   }
-}
+};
 // --------------------------------
 // Get tasks for channel or user
 // --------------------------------
@@ -161,7 +161,7 @@ exports.getTasks = function(origin, dest, cb)
       function (result, err) {
         cb(err, result);
       });
-}
+};
 
 
 // --------------------------------

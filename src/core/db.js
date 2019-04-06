@@ -180,7 +180,7 @@ exports.checkTask = function(origin, dest, cb)
       function (result, err) {
         cb(err, result);
       });
-}
+};
 
 // --------------------
 // Remove Channel Task

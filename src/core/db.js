@@ -125,7 +125,7 @@ exports.updateServerLang = function(id, lang)
 
 exports.channelTasks = function(data)
 {
-   var id = data.message.channel.id;
+   //var id = data.message.channel.id;
 
    if (data.message.channel.type === "dm")
    {
@@ -209,7 +209,7 @@ exports.removeTask = function(origin, dest, cb)
 
 exports.getTasksCount = function(origin, cb)
 {
-  return Tasks.count({ where: {'origin': origin }}).then(c => {
+  return Tasks.count({ where: {"origin": origin }}).then(c => {
     cb('', c);
   });
 };

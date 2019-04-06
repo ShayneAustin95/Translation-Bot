@@ -139,11 +139,11 @@ exports.channelTasks = function(data)
       //return autoTranslate(data);
     //});
   //}
-  catch (e) {
-    logger("error", e);
-    data.err = e;
-    return autoTranslate(data);
-  }
+  //catch (e) {
+    //logger("error", e);
+    //data.err = e;
+    //return autoTranslate(data);
+  //}
 };
 // --------------------------------
 // Get tasks for channel or user

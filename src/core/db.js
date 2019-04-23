@@ -125,12 +125,12 @@ exports.updateServerLang = function(id, lang)
 
 exports.channelTasks = function(data)
 {
-   //var id = data.message.channel.id;
+   var id = data.message.channel.id;
 
-   //if (data.message.channel.type === "dm")
-   //{
-      //id = "@" + data.message.author.id;
-   //}
+   if (data.message.channel.type === "dm")
+   {
+      id = "@" + data.message.author.id;
+   }
 
   //try {
     //const taskList = Tasks.findAll({ where: { origin: id, active: true }}).then(
